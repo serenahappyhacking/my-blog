@@ -1,7 +1,6 @@
 import React from "react"
 import { css } from "@emotion/core"
 import { Link } from "gatsby"
-
 import { rhythm } from "../utils/typography"
 
 export default function Layout({ children }) {
