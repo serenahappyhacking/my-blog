@@ -3,19 +3,32 @@ import { graphql } from "gatsby"
 import { css } from "@emotion/core"
 import { rhythm } from "../utils/typography"
 import Layout from "../components/layout"
+import { Link } from "gatsby"
+import styled from "styled-components"
+
+const sLink = styled(Link)`
+  font-family: "Patua One", sans-serif;
+  justify-self: end;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 1.1rem;
+  color: ${({ theme, secondary }) =>
+    secondary ? theme.colors.white : theme.colors.red};
+  background: ${({ theme, secondary }) =>
+    secondary ? theme.colors.red : theme.colors.white};
+`
 
 export default function Home({ data }) {
-  console.log(data)
   return (
     <Layout>
       <div>
         <h1
           css={css`
             display: inline-block;
-            border-bottom: 1px solid;
+            color: lightpink;
           `}
         >
-          Amazing Pandas Eating Things
+          我的博客
         </h1>
         <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
         {data.allMarkdownRemark.edges.map(({ node }) => (
@@ -25,7 +38,16 @@ export default function Home({ data }) {
                 margin-bottom: ${rhythm(1 / 4)};
               `}
             >
-              {node.frontmatter.title}{" "}
+              <Link
+                css={css`
+                  text-decoration: none;
+                `}
+                to="/sweet-pandas-eating-sweets"
+                activeStyle={{ color: "red" }}
+                partiallyActive={true}
+              >
+                {node.frontmatter.title}
+              </Link>
               <span
                 css={css`
                   color: #bbb;
@@ -44,19 +66,19 @@ export default function Home({ data }) {
 
 export const query = graphql`
   query {
-    allMarkdownRemark (
-      sort: { fields: [frontmatter___date], order: DESC }
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
       totalCount
       edges {
         node {
-          id
           frontmatter {
+            date
             title
-            date(formatString: "DD MMMM, YYYY")
           }
           excerpt
+          timeToRead
+          html
         }
       }
-    )
+    }
   }
 `

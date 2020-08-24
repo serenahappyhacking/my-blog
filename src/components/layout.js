@@ -9,7 +9,7 @@ export default function Layout({ children }) {
       css={css`
         margin: 0 auto;
         max-width: 700px;
-        padding: ${rhythm(2)};
+        padding: ${rhythm(5)};
         padding-top: ${rhythm(1.5)};
       `}
     >
@@ -21,16 +21,24 @@ export default function Layout({ children }) {
             font-style: normal;
           `}
         >
-          Pandas Eating Lots
+          Serena Wang
         </h3>
       </Link>
       <Link
-        to={`/about/`}
+        to={`/blogs/`}
         css={css`
           float: right;
         `}
       >
-        About
+        Blogs
+      </Link>
+      <Link
+        to={`/thoughts/`}
+        css={css`
+          float: right;
+        `}
+      >
+        Thoughts
       </Link>
       {children}
     </div>
